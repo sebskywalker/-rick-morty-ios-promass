@@ -14,6 +14,8 @@ class CharacterTableViewCell: UITableViewCell {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var speciesLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
+    
+    var onFavoriteTapped: (() -> Void)?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,15 +33,15 @@ class CharacterTableViewCell: UITableViewCell {
         statusLabel.text = nil
         speciesLabel.text = nil
         favoriteButton.setTitle("☆", for: .normal)
+        onFavoriteTapped = nil
     }
     
-    func configure(with character: Character) {
-        
+    func configure(with character: Character, isFavorite: Bool = false) {
         nameLabel.text = character.name
         statusLabel.text = "Status: \(character.status)"
         speciesLabel.text = "Species: \(character.species)"
         
-        favoriteButton.setTitle("☆", for: .normal)
+        favoriteButton.setTitle(isFavorite ? "★" : "☆", for: .normal)
         
         guard let imageURL = URL(string: character.image) else {
             return
@@ -58,5 +60,9 @@ class CharacterTableViewCell: UITableViewCell {
             }
             
         }.resume()
+    }
+    
+    @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+        onFavoriteTapped?()
     }
 }

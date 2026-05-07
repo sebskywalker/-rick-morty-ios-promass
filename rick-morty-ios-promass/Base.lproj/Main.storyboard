@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Tvv-cB-ifr">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Tvv-cB-ifr">
                                 <rect key="frame" x="0.0" y="26" width="393" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -52,13 +52,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Trt-tS-5Xp">
-                                                    <rect key="frame" x="315" y="43" width="41" height="35"/>
+                                                    <rect key="frame" x="289" y="43" width="41" height="35"/>
                                                     <state key="normal" title="Button"/>
                                                     <buttonConfiguration key="configuration" style="plain" title="☆"/>
+                                                    <connections>
+                                                        <action selector="favoriteButtonTapped:" destination="lmO-nu-hTV" eventType="touchUpInside" id="cXc-xi-3yT"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Trt-tS-5Xp" firstAttribute="leading" secondItem="bCA-6k-Q6C" secondAttribute="trailing" constant="46" id="KD5-GQ-IGQ"/>
+                                                <constraint firstItem="Trt-tS-5Xp" firstAttribute="leading" secondItem="bCA-6k-Q6C" secondAttribute="trailing" constant="20" id="KD5-GQ-IGQ"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="S9H-uj-ZUU" secondAttribute="bottom" constant="-23" id="PqU-uq-mDv"/>
                                                 <constraint firstItem="bCA-6k-Q6C" firstAttribute="leading" secondItem="S9H-uj-ZUU" secondAttribute="trailing" constant="8" symbolic="YES" id="Q6k-Sn-zUw"/>
                                                 <constraint firstItem="0jk-jP-8P8" firstAttribute="top" secondItem="Ek1-eu-5qJ" secondAttribute="topMargin" id="Xfs-pG-CDR"/>
@@ -87,8 +90,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Tvv-cB-ifr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="F9z-Gd-EPg"/>
-                            <constraint firstAttribute="bottom" secondItem="Tvv-cB-ifr" secondAttribute="bottom" id="IBo-Rw-TRL"/>
+                            <constraint firstItem="Tvv-cB-ifr" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="26" id="F9z-Gd-EPg"/>
+                            <constraint firstAttribute="bottom" secondItem="Tvv-cB-ifr" secondAttribute="bottom" constant="-26" id="IBo-Rw-TRL"/>
                             <constraint firstItem="Tvv-cB-ifr" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="aMI-kM-IsZ"/>
                             <constraint firstItem="Tvv-cB-ifr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bGT-Ah-D1C"/>
                         </constraints>

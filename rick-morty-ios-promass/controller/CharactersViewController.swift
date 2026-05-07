@@ -4,7 +4,6 @@
 //
 //  Created by seb's on 5/6/26.
 //
-
 import UIKit
 import SwiftUI
 
@@ -27,20 +26,18 @@ class CharactersViewController: UIViewController {
         tableView.rowHeight = 120
         
         setupSearchController()
-
         fetchData()
     }
     
     func setupSearchController() {
         title = "Characters"
+        
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
         
         if #available(iOS 16.0, *) {
             navigationItem.preferredSearchBarPlacement = .stacked
         }
-        
         
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -146,9 +143,33 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
         let character = characters[indexPath.row]
-        cell.configure(with: character)
+        let isFavorite = FavoritesManager.shared.isFavorite(characterID: character.id)
+        
+        cell.configure(with: character, isFavorite: isFavorite)
+        
+        cell.onFavoriteTapped = { [weak self] in
+            guard let self = self else { return }
+            
+            if FavoritesManager.shared.isFavorite(characterID: character.id) {
+                FavoritesManager.shared.removeFavorite(characterID: character.id)
+            } else {
+                FavoritesManager.shared.saveFavorite(character: character)
+            }
+            
+            self.tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedCharacter = characters[indexPath.row]
+        let detailView = CharacterDetailView(character: selectedCharacter)
+        let hostingController = UIHostingController(rootView: detailView)
+        
+        navigationController?.pushViewController(hostingController, animated: true)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -171,16 +192,4 @@ extension CharactersViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fetchData()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let selectedCharacter = characters[indexPath.row]
-        
-        let detailView = CharacterDetailView(character: selectedCharacter)
-        let hostingController = UIHostingController(rootView: detailView)
-        
-        navigationController?.pushViewController(hostingController, animated: true)
-    }
-    
 }
