@@ -13,15 +13,21 @@ final class APIService {
     
     private init() {}
     
-    func fetchCharacters(completion: @escaping (Result<[Character], Error>) -> Void) {
+    private let baseURL = "https://rickandmortyapi.com/api/character"
+    
+    func fetchCharacters(
+        from urlString: String? = nil,
+        completion: @escaping (Result<CharacterResponse, Error>) -> Void
+    ) {
         
-        guard let url = URL(string: "https://rickandmortyapi.com/api/character") else {
+        let urlToUse = urlString ?? baseURL
+        
+        guard let url = URL(string: urlToUse) else {
             return
         }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
             
-            // Error de red
             if let error = error {
                 DispatchQueue.main.async {
                     completion(.failure(error))
@@ -29,18 +35,16 @@ final class APIService {
                 return
             }
             
-            // Validar data
             guard let data = data else {
                 return
             }
             
-            // Decodificación en contexto concurrente (Swift 6 safe)
             Task {
                 do {
                     let decoded = try JSONDecoder().decode(CharacterResponse.self, from: data)
                     
                     await MainActor.run {
-                        completion(.success(decoded.results))
+                        completion(.success(decoded))
                     }
                     
                 } catch {
