@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class CharactersViewController: UIViewController {
 
@@ -170,4 +171,16 @@ extension CharactersViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         fetchData()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedCharacter = characters[indexPath.row]
+        
+        let detailView = CharacterDetailView(character: selectedCharacter)
+        let hostingController = UIHostingController(rootView: detailView)
+        
+        navigationController?.pushViewController(hostingController, animated: true)
+    }
+    
 }
