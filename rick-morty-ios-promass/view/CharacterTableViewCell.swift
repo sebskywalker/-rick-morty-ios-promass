@@ -34,9 +34,29 @@ class CharacterTableViewCell: UITableViewCell {
     }
     
     func configure(with character: Character) {
+        
         nameLabel.text = character.name
         statusLabel.text = "Status: \(character.status)"
         speciesLabel.text = "Species: \(character.species)"
+        
         favoriteButton.setTitle("☆", for: .normal)
+        
+        guard let imageURL = URL(string: character.image) else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: imageURL) { [weak self] data, _, error in
+            
+            guard let data = data,
+                  error == nil,
+                  let image = UIImage(data: data) else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.characterImageView.image = image
+            }
+            
+        }.resume()
     }
 }
