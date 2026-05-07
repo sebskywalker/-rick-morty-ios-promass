@@ -14,6 +14,9 @@ class CharactersViewController: UIViewController {
     var characters: [Character] = []
     var nextPageURL: String?
     var isLoading = false
+    var isSearching = false
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +24,34 @@ class CharactersViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = 120
+        
+        setupSearchController()
 
         fetchData()
+    }
+    
+    func setupSearchController() {
+        title = "Characters"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        
+        if #available(iOS 16.0, *) {
+            navigationItem.preferredSearchBarPlacement = .stacked
+        }
+        
+        
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search characters"
+        
+        definesPresentationContext = true
     }
 
     func fetchData() {
         guard !isLoading else { return }
         
+        isSearching = false
         isLoading = true
 
         APIService.shared.fetchCharacters { [weak self] result in
@@ -53,6 +77,7 @@ class CharactersViewController: UIViewController {
     
     func loadMoreCharacters() {
         guard !isLoading else { return }
+        guard !isSearching else { return }
         guard let nextPageURL = nextPageURL else { return }
         
         isLoading = true
@@ -74,6 +99,31 @@ class CharactersViewController: UIViewController {
                 
             case .failure(let error):
                 print("Error al cargar más personajes:", error.localizedDescription)
+            }
+        }
+    }
+    
+    func searchCharacters(with name: String) {
+        guard !name.trimmingCharacters(in: .whitespaces).isEmpty else {
+            fetchData()
+            return
+        }
+        
+        isSearching = true
+        
+        APIService.shared.searchCharacters(name: name) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let response):
+                self.characters = response.results
+                self.nextPageURL = response.info.next
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print("Search error:", error.localizedDescription)
+                self.characters = []
+                self.tableView.reloadData()
             }
         }
     }
@@ -108,5 +158,16 @@ extension CharactersViewController: UITableViewDelegate, UITableViewDataSource {
         if position > contentHeight - scrollViewHeight - 100 {
             loadMoreCharacters()
         }
+    }
+}
+
+extension CharactersViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchCharacters(with: searchText)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        fetchData()
     }
 }
