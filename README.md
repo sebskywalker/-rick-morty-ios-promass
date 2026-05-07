@@ -83,16 +83,44 @@ view/
 # Screenshots
 
 ## Characters
-(Add screenshot here)
+
+| Light Mode | Dark Mode |
+
+|---|---|
+
+| <img src="screenshots/characters.png" width="250"> | <img src="screenshots/charactersdark.png" width="250"> |
+
+---
+
+## Character Detail
+
+| Light Mode | Dark Mode |
+
+|---|---|
+
+| <img src="screenshots/detail.png" width="250"> | <img src="screenshots/detaildark.png" width="250"> |
+
+---
 
 ## Favorites
-(Add screenshot here)
 
-## Detail Screen
-(Add screenshot here)
+| Light Mode | Dark Mode |
+
+|---|---|
+
+| <img src="screenshots/favorites.png" width="250"> | <img src="screenshots/favoritesdark.png" width="250"> |
+
+---
+
+## Search Characters
+
+<img src="screenshots/search characters.png" width="250">
+
+---
 
 ## Offline Alert
-(Add screenshot here)
+
+<img src="screenshots/no internet alerta.png" width="250">
 
 ---
 
