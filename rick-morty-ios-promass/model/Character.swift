@@ -13,4 +13,14 @@ struct Character: Codable {
     let status: String
     let species: String
     let image: String
+    
+    let type: String?
+    let gender: String?
+    let origin: CharacterLocation?
+    let location: CharacterLocation?
+    let episode: [String]?
+}
+
+struct CharacterLocation: Codable {
+    let name: String
 }

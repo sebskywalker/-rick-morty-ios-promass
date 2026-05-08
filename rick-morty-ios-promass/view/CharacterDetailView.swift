@@ -4,7 +4,6 @@
 //
 //  Created by seb's on 5/6/26.
 //
-
 import SwiftUI
 
 struct CharacterDetailView: View {
@@ -27,24 +26,49 @@ struct CharacterDetailView: View {
                 .shadow(radius: 8)
                 
                 VStack(spacing: 8) {
+                    
                     Text(character.name)
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                     
-                    Text(character.status)
-                        .font(.title3)
+                    Text("Character ID: \(character.id)")
+                        .font(.headline)
                         .foregroundStyle(.secondary)
                     
-                    Text(character.species)
+                    Text(character.status)
                         .font(.title3)
                         .foregroundStyle(.secondary)
                 }
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    DetailRow(title: "Status", value: character.status)
                     DetailRow(title: "Species", value: character.species)
-                    DetailRow(title: "Character ID", value: "\(character.id)")
+                }
+                .padding()
+                .background(Color(.secondarySystemBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 18))
+                .padding(.horizontal)
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    if let gender = character.gender {
+                        DetailRow(title: "Gender", value: gender)
+                    }
+                    
+                    if let origin = character.origin?.name {
+                        DetailRow(title: "Origin", value: origin)
+                    }
+                    
+                    if let location = character.location?.name {
+                        DetailRow(title: "Location", value: location)
+                    }
+                    
+                    if let episodes = character.episode {
+                        DetailRow(title: "Episodes", value: "\(episodes.count)")
+                    }
+                    
+                    if let type = character.type, !type.isEmpty {
+                        DetailRow(title: "Type", value: type)
+                    }
                 }
                 .padding()
                 .background(Color(.secondarySystemBackground))
@@ -52,6 +76,7 @@ struct CharacterDetailView: View {
                 .padding(.horizontal)
             }
             .padding(.top, 24)
+            .padding(.bottom, 32)
         }
         .navigationTitle("Detail")
         .navigationBarTitleDisplayMode(.inline)
@@ -63,7 +88,7 @@ struct DetailRow: View {
     let value: String
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Text(title)
                 .fontWeight(.semibold)
             
@@ -71,6 +96,7 @@ struct DetailRow: View {
             
             Text(value)
                 .foregroundStyle(.secondary)
+                .multilineTextAlignment(.trailing)
         }
     }
 }

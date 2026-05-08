@@ -36,6 +36,13 @@ final class FavoritesManager {
         favorite.species = character.species
         favorite.image = character.image
         
+        // Extra detail information for offline detail screen.
+        favorite.gender = character.gender ?? ""
+        favorite.origin = character.origin?.name ?? ""
+        favorite.location = character.location?.name ?? ""
+        favorite.type = character.type ?? ""
+        favorite.episodeCount = Int64(character.episode?.count ?? 0)
+        
         do {
             try context.save()
             print("✅ Favorito guardado")
@@ -63,7 +70,6 @@ final class FavoritesManager {
     func isFavorite(characterID: Int) -> Bool {
         
         let request: NSFetchRequest<FavoriteCharacterEntity> = FavoriteCharacterEntity.fetchRequest()
-        
         request.predicate = NSPredicate(format: "id == %d", characterID)
         
         do {
@@ -80,7 +86,6 @@ final class FavoritesManager {
     func removeFavorite(characterID: Int) {
         
         let request: NSFetchRequest<FavoriteCharacterEntity> = FavoriteCharacterEntity.fetchRequest()
-        
         request.predicate = NSPredicate(format: "id == %d", characterID)
         
         do {
@@ -88,7 +93,6 @@ final class FavoritesManager {
             
             if let favoriteToDelete = result.first {
                 context.delete(favoriteToDelete)
-                
                 try context.save()
                 
                 print("🗑 Favorito eliminado")

@@ -40,6 +40,11 @@ This project was developed as part of a technical iOS challenge focused on:
 - Offline alert handling
 - Fallback to saved favorites
 
+## Launch Screen
+- Custom launch screen
+- Light mode and dark mode support
+- Responsive centered logo
+
 ---
 
 # Technologies Used
@@ -91,7 +96,7 @@ view/
 
 | Light Mode | Dark Mode |
 |---|---|
-| <img src="screenshots/caracters.png" width="250"> | <img src="screenshots/darkmodecharacters.png" width="250"> |
+| <img src="screenshots/characters.png" width="250"> | <img src="screenshots/darkmodecharacters.png" width="250"> |
 
 ---
 
@@ -130,6 +135,14 @@ view/
 ## Offline Alert
 
 <img src="screenshots/no internet.png" width="250">
+
+---
+
+## Launch Screen
+
+| Light Mode | Dark Mode |
+|---|---|
+| <img src="screenshots/launch.png" width="250"> | <img src="screenshots/launchdark.png" width="250"> |
 
 ---
 
