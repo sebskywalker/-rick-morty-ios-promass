@@ -96,7 +96,7 @@ view/
 
 | Light Mode | Dark Mode |
 |---|---|
-| <img src="screenshots/characters.png" width="250"> | <img src="screenshots/darkmodecharacters.png" width="250"> |
+| <img src="screenshots/caracters.png" width="250"> | <img src="screenshots/darkmodecharacters.png" width="250"> |
 
 ---
 
