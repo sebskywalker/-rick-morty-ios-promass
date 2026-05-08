@@ -19,14 +19,19 @@ This project was developed as part of a technical iOS challenge focused on:
 - Infinite scroll pagination
 - Search characters by name
 - Dark mode support
+- Dynamic favorites system
 
 ## Character Detail
 - Detail screen built with SwiftUI
 - UIKit → SwiftUI navigation using UIHostingController
+- Extended character information
+- Responsive UI for light and dark mode
 
 ## Favorites
 - Save favorite characters
-- Remove favorites
+- Remove favorites directly from:
+  - Characters screen
+  - Favorites screen using swipe-to-delete
 - Core Data persistence
 - Favorites available offline
 
@@ -85,42 +90,46 @@ view/
 ## Characters
 
 | Light Mode | Dark Mode |
-
 |---|---|
-
-| <img src="screenshots/characters.png" width="250"> | <img src="screenshots/charactersdark.png" width="250"> |
+| <img src="screenshots/caracters.png" width="250"> | <img src="screenshots/darkmodecharacters.png" width="250"> |
 
 ---
 
 ## Character Detail
 
 | Light Mode | Dark Mode |
-
 |---|---|
-
-| <img src="screenshots/detail.png" width="250"> | <img src="screenshots/detaildark.png" width="250"> |
+| <img src="screenshots/details.png" width="250"> | <img src="screenshots/darkmodedetails.png" width="250"> |
 
 ---
 
 ## Favorites
 
 | Light Mode | Dark Mode |
-
 |---|---|
-
-| <img src="screenshots/favorites.png" width="250"> | <img src="screenshots/favoritesdark.png" width="250"> |
+| <img src="screenshots/favorites.png" width="250"> | <img src="screenshots/darkmodefavorites.png" width="250"> |
 
 ---
 
 ## Search Characters
 
-<img src="screenshots/search characters.png" width="250">
+<img src="screenshots/serch.png" width="250">
+
+---
+
+## Remove Favorites
+
+### Swipe To Delete
+
+| Before Delete | Delete Action |
+|---|---|
+| <img src="screenshots/deletefav2.png" width="250"> | <img src="screenshots/deletefav1.png" width="250"> |
 
 ---
 
 ## Offline Alert
 
-<img src="screenshots/no internet alerta.png" width="250">
+<img src="screenshots/no internet.png" width="250">
 
 ---
 
